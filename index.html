@@ -195,8 +195,9 @@
 
                     <h2 class="text-2xl font-bold text-center mb-4">Receipt</h2>
 
-                    <div id="receiptItems" class="space-y-2 mb-4"></div>
-                    <div class="text-xl font-semibold" id="receiptTotal"></div>
+                    <div id="receiptItems" class="space-y-2 mb-6"></div>
+
+                    <div class="text-xl font-bold uppercase" id="receiptTotal"></div>
                     <div class="text-lg" id="receiptGiven"></div>
                     <div class="text-lg" id="receiptChange"></div>
 
@@ -239,13 +240,20 @@
 
 
             function updateTotal() {
+
                 let total = 0;
+
+                // check each cart item
                 $('.cartItem').each(
                     function () {
+                        // get subtotal of each item from attribute 'data-subtotal'; otherwise, return 0
                         const subtotal = parseFloat($(this).attr('data-subtotal')) || 0;
+
+                        // add value to total
                         total += subtotal;
                     }
                 );
+
                 $('#orderTotal').text('Total: ' + total + ' PHP');
             }
 
@@ -627,7 +635,18 @@
                 function payment(event, el) {
                     event.preventDefault();
 
-                    const amountOwed = orderPrices.reduce((partialSum, a) => partialSum + a, 0);
+                    let total = 0;
+                    // check each cart item
+                    $('.cartItem').each(
+                        function () {
+                            // get subtotal of each item from attribute 'data-subtotal'; otherwise, return 0
+                            const subtotal = parseFloat($(this).attr('data-subtotal')) || 0;
+
+                            // add value to total
+                            total += subtotal;
+                        }
+                    );
+                    const amountOwed = total;
                     const amountGiven = parseFloat(el.elements['myPayment'].value);
 
                     if (orderPrices.length > 0) {
