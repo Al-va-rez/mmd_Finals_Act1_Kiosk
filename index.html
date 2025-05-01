@@ -687,7 +687,7 @@
                 function () {
                     $('#receipt').hide();
                     $('#cart').empty();
-                    $('#cartPlaceholder').show();
+                    $('#cart').append($('<div></div>').attr('id', 'cartPlaceholder').text('No items added yet.'));
                     $('#orderTotal').text('Total: ');
                     orderPrices = [];
                     $('form[name="myForm"]')[0].reset();
