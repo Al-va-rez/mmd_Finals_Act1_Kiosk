@@ -533,7 +533,7 @@
 
 
                         // create container for a new cart item and append name and the two containers
-                        const cartItem = $('<div></div>').attr('data-subtotal', subtotal).addClass('cartItem flex flex-col justify-center border border-gray-400 rounded-md w-[31%] h-auto gap-4 px-6 py-8');
+                        const cartItem = $('<div></div>').attr('data-subtotal', subtotal).addClass('cartItem flex flex-col hover:cursor-pointer justify-center border border-gray-400 rounded-md w-[31%] h-auto gap-4 px-6 py-8');
                         cartItem.append(orderName);
                         cartItem.append(quantityContainer);
                         cartItem.append(priceContainer);
