@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seaside Sizzle</title>
+        <link rel="icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/seafood-restaurant-4452716-3689187.png?f=webp&w=256">
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    </head>
+    <body>
+        <header class="bg-transparent fixed top-0 z-50 w-screen py-2 transition-all duration-500">
+            <nav class="flex items-center justify-between max-w-screen-xl mx-auto px-7 py-4 transition-all ease-in-out duration-500 bg-white rounded-full shadow-xl">
+
+                <!-- Banner -->
+                <div class="flex items-center space-x-2">
+                    <img class="max-h-12 max-w-auto" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/seafood-restaurant-4452716-3689187.png?f=webp&w=256" alt="">
+                    <div class="text-xl sm:max-2xl:text-base font-bold leading-tight">Seaside<br>Sizzle</div>
+                </div>
+                <!-- /Banner -->
+
+
+                <!-- Nav -->
+                <div class="flex items-center space-x-24 text-2xl sm:max-2xl:text-lg">
+                    <button onclick="location.href='#'" class="px-5 py-3 transition-all duration-500 ease-in-out hover:bg-red-500 hover:rounded-full hover:shadow-2xl hover:text-white">
+                        Home
+                    </button>
+                    <button onclick="location.href='#'" class="px-5 py-3 transition-all duration-500 ease-in-out hover:bg-red-500 hover:rounded-full hover:shadow-2xl hover:text-white">
+                        About
+                    </button>
+                    <button onclick="location.href='#root'" class="px-5 py-3 underline font-bold transition-all duration-500 ease-in-out hover:bg-red-500 hover:rounded-full hover:shadow-2xl hover:text-white">
+                        Menu
+                    </button>
+                </div>
+                <!-- /Nav -->
+
+
+                <!-- Misc -->
+                <div class="flex items-center justify-evenly space-x-6 text-2xl text-xl sm:max-2xl:text-base">
+                    <button class="hover:underline">Sign In</button>
+                    <button class="bg-red-400 px-5 py-3 rounded-full text-white transition-all duration-500 ease-in-out hover:bg-red-500 hover:shadow-2xl">Sign Up</button>
+                </div>
+                <!-- /Misc -->
+
+            </nav>
+        </header>
+
+
+        <main>
+            
+            <section id="root" class="bg-[url(https://img.freepik.com/free-photo/top-view-fresh-seafood-table_23-2148290490.jpg?t=st=1744420316~exp=1744423916~hmac=36fb46f68b93ad34e6d531fda607bf8ebfcfa540fd96cd366b8df860a0e34905&w=996)] bg-cover bg-center bg-no-repeat h-auto w-full">
+                
+                <div class="flex flex-col h-auto w-full items-center justify-center bg-black/20 py-36 gap-16">  
+
+                    <!-- CART -->
+                    <div class="flex flex-col w-[65%] h-[35vh] border rounded-lg bg-white">
+
+                        <!-- Header -->
+                        <div class="bg-red-500 border-b rounded-t-lg text-center font-bold text-2xl text-white py-3">CART</div>
+                        <!-- /Header -->
+
+
+                        <div class="flex mt-6 gap-4">
+
+                            <!-- Actual Cart -->
+                            <div id="cart" class="flex flex-wrap w-[57%] max-h-[24vh] overflow-y-auto gap-4 px-4">
+                                
+                                <div id="cartPlaceholder">No items added yet.</div>
+
+                                <!-- add items dynamically using jqeury -->
+
+                            </div>
+                            <!-- /Actual Cart -->
+
+
+                            <!-- Payment -->
+                            <div class="flex flex-col w-[37%]">
+                                <div id="orderTotal" class="text-3xl font-semibold">Total: </div>
+
+                                <form action="#" name="myForm" onsubmit="payment(event, this)" class="space-y-2">
+
+                                    <div class="flex flex-col items-end gap-4">
+                                        <input class="w-full border rounded p-3 text-2xl focus:outline focus:outline-2 focus:outline-orange-200 focus:cursor-none" name="myPayment" type="number" placeholder="Enter the amount here" min="1" required>
+                                        <button type="submit" class="bg-green-600 rounded-md text-white text-2xl px-4 py-2 hover:bg-green-700">Pay</button>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                            <!-- /Payment -->
+
+                        </div>
+
+                    </div>
+                    <!-- /CART -->
+
+
+                    <!-- MENU -->
+                    <div class="flex flex-col w-[65%] h-[auto] border rounded-lg bg-white">
+
+                        <!-- Header -->
+                        <div class="bg-red-500 border-b rounded-t-lg text-center font-bold text-5xl text-white py-6">MENU</div>
+                        <!-- /Header -->
+                        
+
+                        <!-- Main Content -->
+                        <div id="menu" class="flex flex-wrap justify-center gap-x-8 gap-y-16 px-4 py-12">
+
+                            <!-- add items dynamically using jscript -->
+
+                        </div>
+                        <!-- /Main Content -->
+                        
+                    </div>
+                    <!-- /MENU -->
+
+                </div>
+                
+            </section>
+
+
+            <!-- Add Order Interface -->
+            <section id="addOrder" class="fixed bottom-0 bg-white w-full h-[20vh] flex flex-col items-center space-y-8">
+                <div class="flex w-full justify-evenly bg-yellow-500 text-2xl px-12 py-3">
+
+                    <div class="flex flex-col font-bold">
+                        <!-- Name -->
+                        <div id="itemNameHere"></div>
+                        <!-- Price -->
+                        <div id="itemPriceHere"></div>
+                    </div>
+                    
+
+                    <div id="quantityCounter" class="flex flex-wrap items-center gap-4">
+
+                        <!-- Increment -->
+                        <button id="increaseBtn" class="counterBtns">+</button>
+                        <!-- Quantity -->
+                        <div id="quantityNumber">1</div>
+                        <!-- Decrement -->
+                        <button id="decreaseBtn" class="counterBtns">-</button>
+
+                    </div>
+                </div>
+                <div class="flex w-1/2 justify-evenly">
+
+                    <!-- Add Order -->
+                    <button id="addToCart" class="greenInterfaceBtn">Add to Cart</button>
+                    <!-- Cancel Order -->
+                    <button id="cancelOrder" class="grayInterfaceBtn">Cancel order</button>
+
+                </div>
+            </section>
+            <!-- /Add Order Interface -->
+
+
+            <!-- Edit Cart Interface -->
+            <section id="editOrder" class="fixed bottom-0 bg-white w-full h-[20vh] flex flex-col items-center space-y-8">
+                <div class="flex w-full justify-evenly bg-yellow-500 text-2xl px-12 py-3">
+
+                    <div class="flex flex-col font-bold">
+                        <!-- Name -->
+                        <div id="editItemNameHere"></div>
+                        <!-- Price -->
+                        <div id="editItemPriceHere"></div>
+                    </div>
+
+                    <div id="quantityCounter" class="flex flex-wrap items-center gap-4">
+
+                        <!-- Increment -->
+                        <button id="increaseBtnEdit" class="counterBtns">+</button>
+                        <!-- Quantity -->
+                        <div id="editQuantityNumber">1</div>
+                        <!-- Decrement -->
+                        <button id="decreaseBtnEdit" class="counterBtns">-</button>
+
+                    </div>
+                </div>
+                <div class="flex w-1/2 justify-evenly">
+
+                    <!-- Update Order -->
+                    <button id="editOrderedItem" class="greenInterfaceBtn">Save Changes</button>
+                    <!-- Delete Order -->
+                    <button id="removeFromCart" class="grayInterfaceBtn">Remove from Cart</button>
+
+                </div>
+            </section>
+            <!-- /Edit Cart Interface -->
+
+
+            <!-- Receipt -->
+            <div id="receipt" class="fixed inset-0 bg-white bg-opacity-75 flex flex-col items-center justify-center z-50 p-8">
+
+                <div class="bg-white border rounded-lg shadow-lg p-6 w-[50%] max-h-[80vh] overflow-y-auto">
+
+                    <h2 class="text-2xl font-bold text-center mb-4">Receipt</h2>
+
+                    <div id="receiptItems" class="space-y-2 mb-4"></div>
+                    <div class="text-xl font-semibold" id="receiptTotal"></div>
+                    <div class="text-lg" id="receiptGiven"></div>
+                    <div class="text-lg" id="receiptChange"></div>
+
+                    <button id="closeReceipt" class="mt-6 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                        Return to Menu
+                    </button>
+                </div>
+
+            </div>
+            <!-- /Receipt -->
+
+        </main>
+        
+
+        <footer class="bg-black">
+            <div class="flex items-center justify-evenly w-[80%] mx-auto text-white p-12">
+                <div class="text-2xl sm:max-2xl:text-lg font-semibold">
+                    Seaside Sizzle
+                </div>
+                <div class="flex flex-col gap-4 items-center text-lg sm:max-2xl:text-xs">
+                    <div>&#169 All Rights Reserved</div>
+                    <div>Email: seaside.sizzle@fake.com</div>
+                    <div>Open Hours: Weekdays (7:00 AM - 10:00 PM), Weekends (8:00 AM - 8:00 PM)</div>
+                </div>
+                <div class="flex flex-row w-52 gap-6 text-white text-xl sm:max-2xl:text-sm">
+                    <div class="hover:text-gray-400"><a href="">Facebook</a></div>
+                    <div class="hover:text-gray-400"><a href="">Instagram</a></div>
+                    <div class="hover:text-gray-400"><a href="">Twitter</a></div>
+                    <div class="hover:text-gray-400"><a href="">Youtube</a></div>
+                </div>
+            </div>
+        </footer>
+
+
+
+        <script>
+            $('#addOrder').hide();
+            $('#editOrder').hide();
+            $('#receipt').hide();
+
+
+            function updateTotal() {
+                let total = 0;
+                $('.cartItem').each(
+                    function () {
+                        const subtotal = parseFloat($(this).attr('data-subtotal')) || 0;
+                        total += subtotal;
+                    }
+                );
+                $('#orderTotal').text('Total: ' + total + ' PHP');
+            }
+
+
+            // Recurring Styles
+                $('.greenInterfaceBtn').addClass('bg-green-600 hover:bg-green-700 rounded-lg w-[43%] py-2 text-xl text-center text-white');
+                $('.grayInterfaceBtn').addClass('bg-gray-500 hover:bg-gray-600 rounded-lg w-[43%] py-2 text-xl text-center text-white');
+            // Recurring Styles
+
+
+            // Navbar
+                $(window).on('scroll',
+                    function() {
+                        const myHeader = $('header');
+                        const navbar = $('nav');
+
+                        if ($(this).scrollTop() > 50) {  // scrolling down the page
+                            myHeader.removeClass('bg-transparent').addClass('bg-white shadow-md');
+                            navbar.removeClass('bg-white rounded-full shadow-xl');
+                        } else {  // at the top of page
+                            myHeader.addClass('bg-transparent').removeClass('bg-white shadow-md');
+                            navbar.addClass('bg-white rounded-full shadow-xl');
+                        }
+                    }
+                );
+            // Navbar
+
+
+            // Menu
+                // Menu item names and prices plus images
+                const menuItems = [
+                    {
+                        name:'Mini Fish & Chips',
+                        desc:'Half-portion of crispy battered white fish with fries and tartar dip.',
+                        price: 60,
+                        image:'https://img.freepik.com/premium-photo/isolated-portion-fried-fish-chips_219193-10402.jpg?w=740'
+                    },
+                    {
+                        name:'Shrimp Tempura',
+                        desc:'Lightly battered shrimp, fried until golden, served with sweet chili sauce.',
+                        price: 40,
+                        image:'https://img.freepik.com/premium-photo/mouthwatering-veggie-tempura-isolated-white-background_787273-66676.jpg?w=740'
+                    },
+                    {
+                        name:'Tuna Sisig',
+                        desc:'Sizzling chopped tuna with onions, chili, and creamy mayo on a hot plate.',
+                        price: 70,
+                        image:'https://img.freepik.com/premium-photo/picture-larb_871710-59586.jpg?w=740'
+                    },
+                    {
+                        name:'Garlic Butter Mussels',
+                        desc:'Steamed mussels tossed in garlic butter sauce, served with toasted bread.',
+                        price: 30,
+                        image:'https://img.freepik.com/premium-photo/plate-mussels-creamy-sauce-accompanied-by-toasted-bread_658005-43732.jpg?w=740'
+                    },
+                    {
+                        name:'Seafood Lumpia',
+                        desc:'Crispy spring rolls stuffed with crab, shrimp, and veggies, served with spiced vinegar dip.',
+                        price: 50,
+                        image:'https://img.freepik.com/premium-photo/delicious-spring-rolls-with-dipping-sauce_1057059-2320.jpg?w=740'
+                    },
+                    {
+                        name:'Spicy Squid Rice Bowl',
+                        desc:'Tender squid rings stir-fried in a spicy glaze, served over garlic rice.',
+                        price: 80,
+                        image:'https://img.freepik.com/premium-photo/japanese-dish-photograph-isolated-plain-background_941097-56981.jpg?w=740'
+                    },
+                    {
+                        name:'Bangus Belly Sinigang',
+                        desc:'Tamarind-based soup with milkfish belly, kangkong, radish, and eggplant.',
+                        price: 90,
+                        image:'https://img.freepik.com/premium-photo/isolated-bowl-salmon-spinach-soup_219193-9828.jpg?w=740'
+                    },
+                    {
+                        name:'Grilled Tilapia with Ensalada',
+                        desc:'Fresh tilapia grilled and served with tomato salad and short grain rice.',
+                        price: 120,
+                        image:'https://img.freepik.com/premium-photo/yummy-baked-cod-with-mediterranean-isolated-white-background_787273-74162.jpg?w=740'
+                    }
+                ];
+
+                // Create menu
+                for (var i = 0; i < menuItems.length; i++) {
+
+                    // menu item container
+                    const menuItem = document.createElement('div');
+                    menuItem.classList.add(
+                        'menuItem',
+                        'flex',
+                        'flex-col',
+                        'items-center',
+                        'w-[30%]',
+                        'border-2',
+                        'border-gray-200',
+                        'transition',
+                        'transform',
+                        'duration-700',
+                        'hover:shadow-xl',
+                        'hover:scale-105',
+                        'hover:cursor-pointer',
+                        'p-4',
+                        'rounded-lg'
+                    );
+
+                    // image
+                    const itemImage = document.createElement('img');
+                    itemImage.src = menuItems[i].image;
+                    itemImage.classList.add('rounded-md', 'transform', 'transition', 'duration-300', 'hover:scale-105');
+
+                    // details
+                    const itemDetails = document.createElement('div');
+                    itemDetails.classList.add('flex', 'flex-col', 'items-center', 'm-6', 'space-y-4');
+
+                    // name
+                    const itemName = document.createElement('div');
+                    itemName.textContent = menuItems[i].name;
+                    itemName.classList.add('itemName', 'text-xl', 'sm:max-2xl:text-lg', 'text-center', 'font-medium');
+
+                    // desc
+                    const itemDesc = document.createElement('div');
+                    itemDesc.textContent = menuItems[i].desc;
+                    itemDesc.classList.add('text-xl', 'sm:max-2xl:text-lg', 'text-center', 'font-light', 'px-2');
+                    
+                    // price
+                    const itemPrice = document.createElement('div');
+                    itemPrice.textContent = menuItems[i].price + ' PHP';
+                    itemPrice.classList.add('itemPrice', 'text-2xl', 'sm:max-2xl:text-xl', 'font-bold', 'text-center');
+
+                    // put name, price, quantity, and order button inside item desc
+                    itemDetails.appendChild(itemName);
+                    itemDetails.appendChild(itemDesc);
+                    itemDetails.appendChild(itemPrice);
+
+                    // put image and desc inside menu item container
+                    menuItem.appendChild(itemImage);
+                    menuItem.appendChild(itemDetails);
+
+                    // add item to menu
+                    document.querySelector('#menu').appendChild(menuItem);
+                }
+            // Menu
+
+
+            // quantity counter
+                let quantity = 1;
+
+                // setting the number of items to order (adding to cart)
+                    $('#increaseBtn').on('click',
+                        function(event) {
+                            quantity++;
+                            $('#quantityNumber').text(quantity);
+                        }
+                    );
+
+                    $('#decreaseBtn').on('click',
+                        function(event) {
+                            if (quantity > 1) {
+                                quantity--;
+                                $('#quantityNumber').text(quantity);
+                            }
+                        }
+                    );
+                // setting the number of items to order (adding to cart)
+
+
+                // changing the quantity of ordered item (editing item in cart)
+                    $('#increaseBtnEdit').on('click',
+                        function(event) {
+                            quantity++;
+                            $('#editQuantityNumber').text(quantity);
+                        }
+                    );
+
+                    $('#decreaseBtnEdit').on('click',
+                        function(event) {
+                            if (quantity > 1) {
+                                quantity--;
+                                $('#editQuantityNumber').text(quantity);
+                            }
+                        }
+                    );
+                // changing the quantity of ordered of item (editing item in cart)
+
+                $('.counterBtns').addClass('bg-white hover:bg-gray-200 active:bg-gray-300 rounded-md px-3 py-1');
+            // quantity counter
+
+
+            // add order interface
+                $('.menuItem').on('click',
+                    function(event) {
+
+                        // show interface to add item and select how many
+                        $('.cartItem').removeClass('border-red-500').addClass('border-gray-400');
+                        $('#editOrder').hide();
+                        $('#addOrder').show();
+
+                        // Prevents other items from looking like they are selected.
+                        // Needs to execute first so that when selecting a second item....
+                        // ...the first item does not have red borders
+                        $('.menuItem').removeClass('border-red-500').addClass('border-gray-200');
+
+                        // highlight selected item
+                        $(this).removeClass('border-gray-200').addClass('border-red-500');
+
+
+                        // name
+                        const itemName = $(this).find('.itemName').text();
+                        $('#itemNameHere').text(itemName);
+
+                        // quantity
+                        quantity = 1;
+                        $('#quantityNumber').text(quantity);
+
+                        // price
+                        // use item name as reference in accessing the menuItems array
+                        const itemData = menuItems.find(item => item.name === itemName);
+                        // if item found in menu, get the price; otherwise, return 0
+                        const itemPrice = itemData ? itemData.price : 0;
+                        $('#itemPriceHere').text('PHP ' + itemPrice);
+                        
+                    }
+                );
+
+                $('#cancelOrder').on('click',
+                    function(event) {
+
+                        // close interface
+                        $('#addOrder').hide();
+
+                        // "De-select" menu item
+                        $('.menuItem').removeClass('border-red-500').addClass('border-gray-200');
+
+                        // reset quantity to display when interface opens again
+                        quantity = 1;
+                    }
+                );
+            // add order interface
+
+
+            // add ordered item to cart
+                const orderPrices = [];
+                $('#addToCart').on('click',
+                    function(event) {
+
+                        // close the interface
+                        $('#addOrder').hide();
+                        // "De-select" the menu item
+                        $('.menuItem').removeClass('border-red-500').addClass('border-gray-200');
+
+
+                        const itemName = $('#itemNameHere').text();
+                        const quantity = parseInt($('#quantityNumber').text());
+
+                        // use item name as reference in accessing the menuItems array
+                        const itemData = menuItems.find(item => item.name === itemName);
+                        // if item found in menu, get the price; otherwise, return 0
+                        const itemPrice = itemData ? itemData.price : 0;
+
+                        const subtotal = itemPrice * quantity;
+                        orderPrices.push(subtotal);
+
+
+                        // get variables to display in cart
+                        const orderName = $('<div></div>').addClass('cartItemName font-semibold').text(itemName);
+                        const orderQuantity = $('<div></div>').addClass('cartItemQuantity text-green-700').text(quantity);
+                        const orderPrice = $('<div></div>').addClass('cartItemPrice').text(subtotal);
+
+
+                        // put quantity and price in container for readability while keeping functionality for later processes
+                        const quantityContainer = $('<div></div>').addClass('flex flex-row gap-2');
+                        const quantityLabel = $('<div></div>').addClass('text-green-700').text('Qty:');
+                        quantityContainer.append(quantityLabel, orderQuantity)
+
+                        const priceContainer = $('<div></div>').addClass('flex flex-row gap-2');
+                        const priceLabel = $('<div></div>').addClass('').text('PHP');
+                        priceContainer.append(priceLabel, orderPrice)
+
+
+                        // create container for a new cart item and append name and the two containers
+                        const cartItem = $('<div></div>').attr('data-subtotal', subtotal).addClass('cartItem flex flex-col justify-center border border-gray-400 rounded-md w-[31%] h-auto gap-4 px-6 py-8');
+                        cartItem.append(orderName);
+                        cartItem.append(quantityContainer);
+                        cartItem.append(priceContainer);
+                        
+
+                        // Append the new item to the cart
+                        $('#cartPlaceholder').hide();
+                        $('#cart').append(cartItem);
+                        updateTotal();
+
+                    }
+                );
+            // add ordered item to cart
+
+
+            // edit ordered items interface
+                let selectedCartItem = null;
+
+
+                $('#cart').on('click', '.cartItem',
+                    function(event) {
+                        
+                        $('.menuItem').removeClass('border-red-500').addClass('border-gray-200');
+                        $('#addOrder').hide();
+                        $('#editOrder').show();
+
+
+                        // Prevents other items from looking like they are selected.
+                        // Needs to execute first so that when selecting a second item....
+                        // ...the first item does not have red borders
+                        $('.cartItem').removeClass('border-red-500').addClass('border-gray-400');
+
+
+                        // highlight selected item
+                        selectedCartItem = $(this);
+                        selectedCartItem.removeClass('border-gray-400').addClass('border-red-500');
+
+                        // get current quantity of selected item
+                        quantity = parseInt(selectedCartItem.find('.cartItemQuantity').text());
+
+                        $('#editItemNameHere').text(selectedCartItem.find('.cartItemName').text());
+                        $('#editItemPriceHere').text('PHP ' + selectedCartItem.find('.cartItemPrice').text());
+                        $('#editQuantityNumber').text(quantity);
+                        
+                    }
+                );
+
+
+                $('#editOrderedItem').on('click',
+                    function(event) {
+
+                        // get new quantity
+                        const newQuantity = parseInt($('#editQuantityNumber').text());
+                        
+                        // get original price of item; alternative to accessing the menuItems array
+                        const itemPrice = parseFloat(selectedCartItem.find('.cartItemPrice').text()) / parseInt(selectedCartItem.find('.cartItemQuantity').text());
+
+                        const newSubtotal = itemPrice * newQuantity;
+
+                        // Update displayed quantity and price
+                        selectedCartItem.find('.cartItemQuantity').text(newQuantity);
+                        selectedCartItem.find('.cartItemPrice').text(newSubtotal);
+                        selectedCartItem.attr('data-subtotal', newSubtotal); // update stored subtotal
+
+
+                        updateTotal();
+
+                        // "De-select" item
+                        $('.cartItem').removeClass('border-red-500').addClass('border-gray-400');
+                        // Close interface
+                        $('#editOrder').hide();
+                    }
+                );
+
+
+                $('#removeFromCart').on('click',
+                    function(event) {
+
+                        if (selectedCartItem) {
+                            selectedCartItem.remove();
+                            selectedCartItem = null;
+
+                            // If no items remain, show placeholder
+                            if ($('#cart').find('.cartItem').length === 0) {
+                                $('#cartPlaceholder').show();
+                            }
+                        }
+
+                        updateTotal();
+
+                        // Close interface
+                        $('#editOrder').hide();
+                    }
+                );
+            // edit ordered items interface
+
+
+            // process payment
+                function payment(event, el) {
+                    event.preventDefault();
+
+                    const amountOwed = orderPrices.reduce((partialSum, a) => partialSum + a, 0);
+                    const amountGiven = parseFloat(el.elements['myPayment'].value);
+
+                    if (orderPrices.length > 0) {
+                        if (amountGiven >= amountOwed) {
+                            const change = amountGiven - amountOwed;
+
+                            // Generate receipt
+                            $('#receiptItems').empty();
+                            $('#cart .cartItem').each(
+                                function () {
+                                    const name = $(this).find('.cartItemName').text();
+                                    const qty = $(this).find('.cartItemQuantity').text();
+                                    const price = $(this).find('.cartItemPrice').text();
+                                    const item = `<div>${qty} x ${name} - PHP ${price}</div>`;
+                                    $('#receiptItems').append(item);
+                                }
+                            );
+
+                            $('#receiptTotal').text('Total: PHP ' + amountOwed);
+                            $('#receiptGiven').text('Amount Given: PHP ' + amountGiven);
+                            $('#receiptChange').text('Change: PHP ' + change);
+
+                            $('#receipt').show();
+
+                            // reset input field
+                            el.reset();
+                        } else {
+                            alert('Not enough balance. Please try again.');
+                        }
+                    } else {
+                        alert('No items ordered');
+                    }
+                }
+            // process payment
+
+
+            $('#closeReceipt').on('click',
+                function () {
+                    $('#receipt').hide();
+                    $('#cart').empty();
+                    $('#cartPlaceholder').show();
+                    $('#orderTotal').text('Total: ');
+                    orderPrices = [];
+                    $('form[name="myForm"]')[0].reset();
+                }
+            );
+        </script>
+    </body>
+</html>
